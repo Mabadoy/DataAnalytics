@@ -12,6 +12,10 @@ df = df.dropna()
 
 # Step 3: Delete all outlier data
 # Assuming we're using the Interquartile Range (IQR) method for outlier detection
+
+# a statistical technique that identifies outliers in a dataset by calculating the range 
+# of the middle 50% of data (between the first and third quartiles) and considering any data points 
+# that fall significantly below the lower boundary or above the upper boundary as potential outliers
 def remove_outliers(df, column):
     Q1 = df[column].quantile(0.25)
     Q3 = df[column].quantile(0.75)
