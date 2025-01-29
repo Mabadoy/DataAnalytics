@@ -1,20 +1,31 @@
-
-################ Data cleaning the Iris dataset #################
-from sklearn import datasets
 import pandas as pd
+import numpy as np
 
-# load iris dataset
-iris = datasets.load_iris()
-# Since this is a bunch, create a dataframe
-iris_df=pd.DataFrame(iris.data)
-iris_df['class']=iris.target
+# Read the CSV file
+df = pd.read_csv('House_Data.csv')
 
-iris_df.columns=['sepal_len', 'sepal_wid', 'petal_len', 'petal_wid', 'class']
-#### ===> TASK 1: here - add two more lines of the code to find the number and mean of missing data
-cleaned_data = iris_df.dropna(how="all", inplace=True) # remove any empty lines
+# Step 1: Delete all duplicate data
+df = df.drop_duplicates()
 
+# Step 2: Delete all null data
+df = df.dropna()
 
-iris_X=iris_df.iloc[:5,[0,1,2,3]]
-print(iris_X)
+# Step 3: Delete all outlier data
+# Assuming we're using the Interquartile Range (IQR) method for outlier detection
+def remove_outliers(df, column):
+    Q1 = df[column].quantile(0.25)
+    Q3 = df[column].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    return df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
 
-### TASK2: Here - Write a short readme to explain above code and how we can calculate the corrolation amoung featuers with description
+# Apply outlier removal to numerical columns
+numerical_columns = df.select_dtypes(include=[np.number]).columns
+for column in numerical_columns:
+    df = remove_outliers(df, column)
+
+# Save the cleaned data to a new CSV file
+df.to_csv('Cleaned_House_Data.csv', index=False)
+
+print("Data cleaning completed. Cleaned data saved to 'Cleaned_House_Data.csv'")
