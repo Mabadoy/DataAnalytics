@@ -1,14 +1,22 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Read the CSV file
 df = pd.read_csv('House_Data.csv')
+
+
+# Using Boxplot to visually identify outliers
+plt.figure(figsize=(10, 5))
+sns.boxplot(data=df)
+plt.show()
 
 # Step 1: Delete all duplicate data
 df = df.drop_duplicates()
 
 # Step 2: Delete all null data
-df = df.dropna()
+df.isnull().sum()
 
 # Step 3: Delete all outlier data
 # Assuming we're using the Interquartile Range (IQR) method for outlier detection
@@ -28,6 +36,11 @@ def remove_outliers(df, column):
 numerical_columns = df.select_dtypes(include=[np.number]).columns
 for column in numerical_columns:
     df = remove_outliers(df, column)
+
+# Using Boxplot to visually identify outliers
+plt.figure(figsize=(10, 5))
+sns.boxplot(data=df)
+plt.show()
 
 # Save the cleaned data to a new CSV file
 df.to_csv('Cleaned_House_Data.csv', index=False)
