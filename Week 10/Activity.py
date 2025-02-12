@@ -11,3 +11,5 @@ print(df.info())
 
 sns.displot(df['Normal_Distribution'], kde=True, bins=50)
 sns.jointplot(x='Normal_Distribution', y='Uniform_Distribution', data=df, kind='scatter')
+
+plt.show()
