@@ -12,8 +12,11 @@ import xgboost as xgb
 
 # Deep Learning Models
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, LSTM, Dropout
+from tensorflow import keras
+from keras import Sequential
+#from tensorflow.keras.models import Sequential
+#from tensorflow.keras.layers import Dense, LSTM, Dropout
+from keras import Dense, LSTM, Dropout
 
 # Time Series Model
 from statsmodels.tsa.arima.model import ARIMA
