@@ -4,13 +4,9 @@ import docx
 import openai
 
 # Set your OpenAI API key
-#OPENAI_API_KEY = "sk-8thp5lUTlulWvf3gZp4_imBC0HrRf89iACcPCcy9hTJQVjghFa_bG-B4PdzsToXz3sjAMTqxcMOPkFxei4uMFamCn0N3"
-#openai.api_key = OPENAI_API_KEY
+OPENAI_API_KEY = "sk-8thp5lUTlulWvf3gZp4_imBC0HrRf89iACcPCcy9hTJQVjghFa_bG-B4PdzsToXz3sjAMTqxcMOPkFxei4uMFamCn0N3"
+openai.api_key = OPENAI_API_KEY
 
-
-curl https://openapi.monica.im/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer sk-8thp5lUTlulWvf3gZp4_imBC0HrRf89iACcPCcy9hTJQVjghFa_bG-B4PdzsToXz3sjAMTqxcMOPkFxei4uMFamCn0N3" \
 
 def extract_text_from_pdf(file_path):
     """Extracts text from a PDF file."""
